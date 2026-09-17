@@ -11,6 +11,14 @@ Whether you want video elements to fill the current browser tab without taking o
 
 ---
 
+## 📦 Quick Download
+
+[![DOWNLOAD SPY PRO EXTENSION (.ZIP)](https://img.shields.io/badge/%E2%AC%87%EF%B8%8F%20DOWNLOAD%20SPY%20PRO%20EXTENSION-(.ZIP)-14b8a6?style=for-the-badge&logo=github&logoColor=white)](https://github.com/posathanmai1-lang/spy-pro/archive/refs/heads/main.zip)
+
+*Click the button above to download the extension ZIP instantly!*
+
+---
+
 ## ✨ Features
 
 - ⬛ **In-Window Fullscreen**: Expand video players to fill the browser tab viewport while keeping tabs, address bar, and OS taskbar accessible.
