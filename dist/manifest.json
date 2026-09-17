@@ -1,0 +1,105 @@
+{
+  "manifest_version": 3,
+  "name": "Spy Pro",
+  "short_name": "Spy Pro",
+  "version": "1.0.0",
+  "description": "Control every fullscreen request: block, in-window, popup window, sticky, or native.",
+  "icons": {
+    "16": "src/icons/icon16.svg",
+    "32": "src/icons/icon32.svg",
+    "48": "src/icons/icon48.svg",
+    "128": "src/icons/icon128.svg"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "windows",
+    "webNavigation",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "service-worker-loader.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "src/ui/popup.html",
+    "default_icon": {
+      "16": "src/icons/icon16.svg",
+      "32": "src/icons/icon32.svg",
+      "48": "src/icons/icon48.svg",
+      "128": "src/icons/icon128.svg"
+    },
+    "default_title": "Spy Pro"
+  },
+  "options_ui": {
+    "page": "src/ui/options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "assets/isolated.ts-loader-BaiRhMZ1.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://chromewebstore.google.com/*",
+        "https://microsoftedge.microsoft.com/*"
+      ],
+      "css": [],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "js": [
+        "assets/main-world.ts-loader-BmPxGZD4.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://chromewebstore.google.com/*",
+        "https://microsoftedge.microsoft.com/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "resources": [
+        "src/icons/*.svg",
+        "assets/messages-DZ8XntxE.js",
+        "assets/messages-DZ8XntxE.js.map",
+        "assets/isolated.ts-DHYI2wQo.js",
+        "assets/isolated.ts-DHYI2wQo.js.map",
+        "assets/main-world.ts-urtHrEJ5.js",
+        "assets/main-world.ts-urtHrEJ5.js.map"
+      ],
+      "use_dynamic_url": false
+    }
+  ],
+  "commands": {
+    "toggle-block": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Toggle block fullscreen on this site"
+    },
+    "open-hud": {
+      "suggested_key": {
+        "default": "Alt+Shift+F"
+      },
+      "description": "Open fullscreen mode HUD / cycle modes"
+    }
+  }
+}

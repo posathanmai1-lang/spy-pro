@@ -15,31 +15,38 @@ Whether you want video elements to fill the current browser tab without taking o
 
 ---
 
-### 📖 Step-by-Step Installation Guide
+### 📖 Easy Installation Guide (No Coding Required!)
 
 #### Step 1: Download & Extract
-1. Click the **[DOWNLOAD SPY PRO EXTENSION (.ZIP)](https://github.com/posathanmai1-lang/spy-pro/archive/refs/heads/main.zip)** button above to get `spy-pro-main.zip`.
-2. Extract (unzip) the file to any folder on your computer.
+1. Click the **[DOWNLOAD SPY PRO EXTENSION (.ZIP)](https://github.com/posathanmai1-lang/spy-pro/archive/refs/heads/main.zip)** button above.
+2. Extract (unzip) the downloaded `spy-pro-main.zip` file on your computer.
 
-#### Step 2: Build the Extension Assets
-Since **Spy Pro** is written in modern TypeScript, build the extension once to generate the production `dist/` folder:
-1. Open a terminal or command prompt inside the extracted `spy-pro-main` folder.
-2. Execute:
-   ```bash
-   npm install
-   npm run build
-   ```
-   *(This creates the required `dist/` folder inside `spy-pro-main`)*.
+#### Step 2: Open Extensions in Browser
+1. Open Chrome, Edge, Brave, or Opera.
+2. Go to the extensions management page:
+   - **Chrome**: Type `chrome://extensions` in the address bar
+   - **Edge**: Type `edge://extensions` in the address bar
+   - **Brave**: Type `brave://extensions` in the address bar
+3. Turn **ON** **Developer mode** using the toggle switch in the top-right corner.
 
-#### Step 3: Load into Browser (Chrome / Edge / Brave / Opera)
-1. Open your browser and go to the extensions management page:
-   - **Chrome**: Type `chrome://extensions` in address bar
-   - **Edge**: Type `edge://extensions` in address bar
-   - **Brave**: Type `brave://extensions` in address bar
-2. Turn **ON** **Developer mode** using the toggle switch in the top-right corner.
-3. Click the **Load unpacked** button (top-left).
-4. Navigate into the extracted `spy-pro-main` folder, click on the **`dist`** folder, and click **Select Folder**.
-5. Done! 🎉 **Spy Pro** is now installed and ready to control any site fullscreen.
+#### Step 3: Load the `dist` Folder
+1. Click the **Load unpacked** button in the top-left area.
+2. Navigate into the extracted `spy-pro-main` folder.
+3. Click on the **`dist`** folder inside it and click **Select Folder**.
+4. Done! 🎉 **Spy Pro** is now installed and active in your toolbar.
+
+---
+
+### 💻 Developer Setup (Optional)
+
+If you want to modify the source code or build from scratch:
+```bash
+git clone https://github.com/posathanmai1-lang/spy-pro.git
+cd spy-pro
+npm install
+npm run dev   # Watch mode for live changes
+npm run build # Build production bundle into dist/
+```
 
 ---
 

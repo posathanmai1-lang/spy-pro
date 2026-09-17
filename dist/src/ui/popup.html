@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=340, initial-scale=1"/>
+  <title>Fullscreen Control</title>
+  <meta name="description" content="Per-site fullscreen policy: block, in-window, windowed, sticky, or native."/>
+  <script type="module" crossorigin src="/assets/popup.html-azs9yYoh.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-DaKOjhqt.js">
+  <link rel="modulepreload" crossorigin href="/assets/storage-CToGBJDS.js">
+  <link rel="modulepreload" crossorigin href="/assets/rules-C71vWFrN.js">
+  <link rel="stylesheet" crossorigin href="/assets/popup-DoqBH52v.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <svg class="header-logo" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="28" height="28" rx="8" fill="url(#hg)"/>
+      <defs>
+        <linearGradient id="hg" x1="0" y1="0" x2="28" y2="28">
+          <stop stop-color="#3b82f6"/>
+          <stop offset="1" stop-color="#8b5cf6"/>
+        </linearGradient>
+      </defs>
+      <path d="M6 10V6h4M18 6h4v4M22 18v4h-4M10 22H6v-4" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <div class="header-info">
+      <div class="header-title">Spy Pro <span class="header-watermark">— by Thanmai</span></div>
+      <div class="header-host" id="header-host">Loading…</div>
+    </div>
+    <button class="header-settings-btn" id="open-options" title="Open settings" aria-label="Open settings">⚙</button>
+  </header>
+
+  <!-- Current policy indicator -->
+  <div class="current-policy" id="current-policy-bar">
+    <div class="current-policy-dot" id="policy-dot"></div>
+    <div>
+      <div class="current-policy-label" id="current-policy-label">Ask</div>
+      <div class="current-policy-sublabel" id="policy-sublabel">Global default</div>
+    </div>
+    <div class="disabled-badge hidden" id="disabled-badge">⏸ Disabled 1h</div>
+  </div>
+
+  <!-- Quick-pick -->
+  <div class="section-label">Set policy for this site</div>
+  <div class="policy-grid" id="policy-grid" role="group" aria-label="Fullscreen policy">
+    <button class="policy-btn" data-policy="ask" id="btn-ask" title="Ask every time">
+      <span class="policy-btn-icon">❓</span>
+      <span class="policy-btn-label">Ask</span>
+    </button>
+    <button class="policy-btn" data-policy="in-window" id="btn-in-window" title="Fill tab (no OS fullscreen)">
+      <span class="policy-btn-icon">⬛</span>
+      <span class="policy-btn-label">In-window</span>
+    </button>
+    <button class="policy-btn" data-policy="windowed" id="btn-windowed" title="Move to popup window">
+      <span class="policy-btn-icon">🪟</span>
+      <span class="policy-btn-label">Windowed</span>
+    </button>
+    <button class="policy-btn" data-policy="native" id="btn-native" title="Allow native OS fullscreen">
+      <span class="policy-btn-icon">⛶</span>
+      <span class="policy-btn-label">Native</span>
+    </button>
+    <button class="policy-btn" data-policy="block" id="btn-block" title="Block all fullscreen">
+      <span class="policy-btn-icon">🚫</span>
+      <span class="policy-btn-label">Block</span>
+    </button>
+    <button class="policy-btn" data-policy="sticky" id="btn-sticky" title="Keep fullscreen across navigations">
+      <span class="policy-btn-icon">📌</span>
+      <span class="policy-btn-label">Sticky</span>
+    </button>
+  </div>
+
+  <!-- Per-origin flags -->
+  <div class="flags-section" id="flags-section">
+    <div class="flag-row">
+      <label class="flag-label" for="toggle-pip">PiP for videos</label>
+      <label class="toggle">
+        <input type="checkbox" id="toggle-pip"/>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+    <div class="flag-row">
+      <label class="flag-label" for="toggle-pointer-lock">Block pointer lock</label>
+      <label class="toggle">
+        <input type="checkbox" id="toggle-pointer-lock"/>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+    <div class="flag-row">
+      <label class="flag-label" for="toggle-f11">Block F11 key</label>
+      <label class="toggle">
+        <input type="checkbox" id="toggle-f11"/>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar" id="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value" id="stat-blocked">0</div>
+      <div class="stat-label">Blocked</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="stat-inwindow">0</div>
+      <div class="stat-label">In-window</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="stat-sticky">0</div>
+      <div class="stat-label">Sticky</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <button class="footer-link" id="btn-disable-hour">Disable for 1 hour</button>
+    <div class="footer-right">
+      <button class="footer-link" id="btn-open-options">Settings →</button>
+      <span class="footer-watermark">by <span class="watermark-author">Thanmai</span></span>
+    </div>
+  </footer>
+
+</body>
+</html>
