@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Spy Pro — Settings & Rules Manager</title>
+  <meta name="description" content="Spy Pro settings: manage per-site policies, fragile sites, import/export rules."/>
+  <link rel="stylesheet" href="options.css"/>
+</head>
+<body>
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" role="navigation" aria-label="Settings navigation">
+    <div class="sidebar-logo">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="9" fill="url(#lg)"/>
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32">
+            <stop stop-color="#3b82f6"/>
+            <stop offset="1" stop-color="#8b5cf6"/>
+          </linearGradient>
+        </defs>
+        <path d="M8 12V8h4M20 8h4v4M24 20v4h-4M12 24H8v-4" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span class="sidebar-logo-text">Spy Pro</span>
+    </div>
+    <ul class="sidebar-nav">
+      <li class="active" data-section="rules">
+        <a href="#rules">📋 Site Rules</a>
+      </li>
+      <li data-section="defaults">
+        <a href="#defaults">⚙ Defaults</a>
+      </li>
+      <li data-section="fragile">
+        <a href="#fragile">🛡 Fragile Sites</a>
+      </li>
+      <li data-section="stats">
+        <a href="#stats">📊 Statistics</a>
+      </li>
+      <li data-section="about">
+        <a href="#about">ℹ About</a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main" id="main-content">
+
+    <!-- ── Rules section ── -->
+    <section id="section-rules" data-page="rules">
+      <h1>Spy Pro Settings &amp; Rules Manager <span class="header-watermark">— by Thanmai</span></h1>
+      <p class="page-description">Customize domain rules, default behavior, and backup settings.</p>
+
+      <div class="rules-toolbar">
+        <input type="search" class="search-input" id="rules-search" placeholder="Filter by host…" aria-label="Search rules"/>
+        <button class="btn btn-primary" id="btn-add-rule">+ Add rule</button>
+        <button class="btn" id="btn-add-current">Use current tab</button>
+        <button class="btn" id="btn-import">⬆ Import</button>
+        <button class="btn" id="btn-export">⬇ Export</button>
+      </div>
+
+      <div class="card" id="rules-table-container">
+        <table id="rules-table" aria-label="Fullscreen site rules">
+          <thead>
+            <tr>
+              <th>Host pattern</th>
+              <th>Policy</th>
+              <th>Flags</th>
+              <th style="width:80px">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="rules-tbody">
+            <!-- populated by JS -->
+          </tbody>
+        </table>
+        <div class="empty-state hidden" id="rules-empty">
+          <div style="font-size:32px">📋</div>
+          <p>No rules yet. Rules override the global default policy.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Defaults section ── -->
+    <section id="section-defaults" data-page="defaults" class="hidden">
+      <h1>Global Defaults</h1>
+      <p class="page-description">Applied when no site-specific rule matches.</p>
+
+      <div class="section">
+        <div class="section-title">Default policy</div>
+        <div class="card">
+          <div class="card-row">
+            <div>
+              <div class="card-row-label">Default fullscreen policy</div>
+              <div class="card-row-desc">What happens when a site requests fullscreen and you have no rule for it.</div>
+            </div>
+            <select class="policy-select" id="default-policy-select" aria-label="Default policy">
+              <option value="ask">Ask every time</option>
+              <option value="in-window">In-window</option>
+              <option value="windowed">Windowed popup</option>
+              <option value="native">Native fullscreen</option>
+              <option value="block">Block all</option>
+              <option value="sticky">Sticky</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Debug</div>
+        <div class="card">
+          <div class="card-row">
+            <div>
+              <div class="card-row-label">Enable debug logging</div>
+              <div class="card-row-desc">Stores verbose logs in session storage. Off by default.</div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="toggle-debug"/>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Fragile sites section ── -->
+    <section id="section-fragile" data-page="fragile" class="hidden">
+      <h1>Fragile Sites</h1>
+      <p class="page-description">These sites default to <strong>native</strong> policy to avoid breaking developer tools or web IDEs. Add patterns like <code>*.example.com</code>.</p>
+
+      <div class="section">
+        <div class="section-title">Fragile site patterns</div>
+        <div class="fragile-list" id="fragile-list" aria-label="Fragile sites list">
+          <!-- populated by JS -->
+        </div>
+        <div style="display:flex; gap:8px; margin-top:10px">
+          <input type="text" class="form-input" id="fragile-input" placeholder="*.example.com" style="flex:1; font-family:monospace" aria-label="Add fragile site pattern"/>
+          <button class="btn btn-primary" id="btn-add-fragile">Add</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Stats section ── -->
+    <section id="section-stats" data-page="stats" class="hidden">
+      <h1>Statistics</h1>
+      <p class="page-description">Local-only counters. Never sent anywhere.</p>
+
+      <div class="stats-grid" id="stats-grid">
+        <!-- populated by JS -->
+      </div>
+
+      <div style="margin-top:16px">
+        <button class="btn btn-danger" id="btn-reset-stats">Reset statistics</button>
+      </div>
+    </section>
+
+    <!-- ── About section ── -->
+    <section id="section-about" data-page="about" class="hidden">
+      <h1>About Fullscreen Control</h1>
+      <p class="page-description">Version <span id="ext-version">1.0.0</span></p>
+
+      <div class="section">
+        <div class="card">
+          <div class="card-row">
+            <div>
+              <div class="card-row-label">Privacy</div>
+              <div class="card-row-desc">Zero telemetry. No remote code. No analytics. All data stays on your device.</div>
+            </div>
+          </div>
+          <div class="card-row">
+            <div>
+              <div class="card-row-label">Permissions</div>
+              <div class="card-row-desc">
+                <code>storage</code> — persist rules<br/>
+                <code>tabs, windows</code> — windowed mode<br/>
+                <code>webNavigation</code> — sticky mode<br/>
+                <code>contextMenus</code> — right-click quick-set<br/>
+                <code>&lt;all_urls&gt;</code> — fullscreen can happen on any site
+              </div>
+            </div>
+          </div>
+          <div class="card-row">
+            <div>
+              <div class="card-row-label">Keyboard shortcuts</div>
+              <div class="card-row-desc">
+                <kbd>Ctrl+Shift+F</kbd> — Toggle block on current site<br/>
+                <kbd>Alt+Shift+F</kbd> — Open / close HUD
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="options-footer">
+        Spy Pro Extension — Created by <span class="watermark-author">Thanmai</span>
+      </footer>
+    </section>
+
+  </main>
+</div>
+
+<!-- Rule edit modal (hidden by default) -->
+<div class="modal-overlay hidden" id="rule-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <h2 id="modal-title">Add rule</h2>
+
+    <div class="form-group">
+      <label class="form-label" for="modal-host">Host pattern</label>
+      <input type="text" class="form-input" id="modal-host" placeholder="youtube.com or *.youtube.com" autocomplete="off"/>
+      <div class="form-hint">Use <code>*.</code> prefix for wildcard subdomains. Optionally add <code>/path</code> for path matching.</div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="modal-policy">Policy</label>
+      <select class="policy-select" id="modal-policy" style="width:100%; padding:8px 28px 8px 10px">
+        <option value="ask">Ask every time</option>
+        <option value="in-window">In-window (fill tab)</option>
+        <option value="windowed">Windowed (popup)</option>
+        <option value="native">Native fullscreen</option>
+        <option value="block">Block fullscreen</option>
+        <option value="sticky">Sticky fullscreen</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Options</label>
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer">
+          <input type="checkbox" id="modal-pip"/> PiP for videos
+        </label>
+        <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer">
+          <input type="checkbox" id="modal-pointer-lock"/> Block pointer lock
+        </label>
+        <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer">
+          <input type="checkbox" id="modal-f11"/> Block F11 key
+        </label>
+        <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer">
+          <input type="checkbox" id="modal-spoof"/> Spoof fullscreen APIs
+        </label>
+        <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer">
+          <input type="checkbox" id="modal-skip-initial"/> Skip initial load (sticky)
+        </label>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" id="modal-cancel">Cancel</button>
+      <button class="btn btn-primary" id="modal-save">Save rule</button>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden file input for import -->
+<input type="file" id="import-input" accept=".json" style="display:none" aria-label="Import rules JSON file"/>
+
+<script type="module" src="options.ts"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+/**
+ * HUD styles — injected into a Shadow DOM, so these only affect
+ * the HUD elements and cannot bleed into page styles.
+ *
+ * The HUD is a compact overlay that appears when policy is 'ask'
+ * or the user presses Alt+Shift+F.
+ */
+
+:host {
+  all: initial;
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ── Backdrop ── */
+.fsc-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: all;
+  opacity: 0;
+  animation: fsc-fade-in 150ms ease forwards;
+}
+
+/* ── Main card ── */
+.fsc-hud {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+  width: 340px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 20px 20px 16px;
+  pointer-events: all;
+  color: #ffffff;
+  opacity: 0;
+  animation: fsc-slide-in 180ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Light mode */
+@media (prefers-color-scheme: light) {
+  .fsc-hud {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+    box-shadow:
+      0 24px 48px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(0, 0, 0, 0.06);
+  }
+  .fsc-hud-title { color: #475569; }
+  .fsc-option-hint { color: #64748b; }
+  .fsc-site-label { color: #334155; background: rgba(0,0,0,0.06); }
+  .fsc-divider { border-color: rgba(0,0,0,0.1); }
+}
+
+/* ── Header ── */
+.fsc-hud-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.fsc-hud-logo {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.fsc-hud-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  flex: 1;
+}
+
+.fsc-site-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 8px;
+  border-radius: 20px;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Option buttons grid ── */
+.fsc-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.fsc-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 120ms ease;
+  color: inherit;
+  font-family: inherit;
+  text-align: center;
+  user-select: none;
+}
+
+.fsc-option:hover, .fsc-option:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.fsc-option:active {
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.fsc-option[data-mode="in-window"] { --accent: #3b82f6; }
+.fsc-option[data-mode="windowed"]  { --accent: #8b5cf6; }
+.fsc-option[data-mode="native"]   { --accent: #10b981; }
+.fsc-option[data-mode="pip"]      { --accent: #f59e0b; }
+.fsc-option[data-mode="block"]    { --accent: #ef4444; }
+.fsc-option[data-mode="sticky"]   { --accent: #f97316; }
+
+.fsc-option:hover, .fsc-option:focus-visible {
+  background: color-mix(in srgb, var(--accent, white) 15%, transparent);
+  border-color: color-mix(in srgb, var(--accent, white) 30%, transparent);
+}
+
+.fsc-option-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.fsc-option-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: inherit;
+}
+
+.fsc-option-hint {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+}
+
+/* PiP button (only shown when video present) */
+.fsc-option[data-mode="pip"].fsc-hidden {
+  display: none;
+}
+
+/* ── Divider ── */
+.fsc-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 4px 0 10px;
+}
+
+/* ── Footer ── */
+.fsc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.fsc-esc-hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.fsc-kbd {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-family: monospace;
+}
+
+.fsc-always-link {
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  background: none;
+  border: none;
+  font-size: 11px;
+  font-family: inherit;
+  padding: 0;
+}
+.fsc-always-link:hover { color: rgba(255, 255, 255, 0.7); }
+
+/* ── Gesture overlay (sticky mode user-gesture button) ── */
+.fsc-gesture-overlay {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483646;
+  background: linear-gradient(135deg, #f97316, #ef4444);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4);
+  pointer-events: all;
+  animation: fsc-fade-in 200ms ease forwards;
+  white-space: nowrap;
+}
+.fsc-gesture-overlay:hover {
+  filter: brightness(1.1);
+  transform: translateX(-50%) scale(1.02);
+}
+.fsc-gesture-overlay:active {
+  transform: translateX(-50%) scale(0.98);
+}
+
+/* ── Animations ── */
+@keyframes fsc-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fsc-slide-in {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes fsc-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}

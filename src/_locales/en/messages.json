@@ -1,0 +1,93 @@
+{
+  "extensionName": {
+    "message": "Fullscreen Control",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Control every fullscreen request: block, in-window, popup window, sticky, or native.",
+    "description": "Extension description"
+  },
+  "policyAsk": {
+    "message": "Ask every time",
+    "description": "Policy label: ask"
+  },
+  "policyInWindow": {
+    "message": "In-window",
+    "description": "Policy label: in-window"
+  },
+  "policyWindowed": {
+    "message": "Windowed popup",
+    "description": "Policy label: windowed"
+  },
+  "policyNative": {
+    "message": "Native fullscreen",
+    "description": "Policy label: native"
+  },
+  "policyBlock": {
+    "message": "Block fullscreen",
+    "description": "Policy label: block"
+  },
+  "policySticky": {
+    "message": "Sticky fullscreen",
+    "description": "Policy label: sticky"
+  },
+  "hudTitle": {
+    "message": "Fullscreen Control",
+    "description": "HUD dialog title"
+  },
+  "hudDismiss": {
+    "message": "Dismiss (Esc)",
+    "description": "HUD dismiss hint"
+  },
+  "hudEnterFullscreen": {
+    "message": "⛶  Enter fullscreen",
+    "description": "Gesture overlay button text"
+  },
+  "commandToggleBlock": {
+    "message": "Toggle block fullscreen on this site",
+    "description": "Keyboard command description"
+  },
+  "commandOpenHud": {
+    "message": "Open fullscreen mode HUD",
+    "description": "Keyboard command description"
+  },
+  "contextMenuParent": {
+    "message": "Fullscreen Control",
+    "description": "Context menu parent item"
+  },
+  "contextMenuDisableHour": {
+    "message": "Disable for 1 hour",
+    "description": "Context menu disable item"
+  },
+  "contextMenuOpenSettings": {
+    "message": "Open settings…",
+    "description": "Context menu settings item"
+  },
+  "statsBlocked": {
+    "message": "Blocked",
+    "description": "Stats label: blocked attempts"
+  },
+  "statsInWindow": {
+    "message": "In-window",
+    "description": "Stats label: in-window redirects"
+  },
+  "statsSticky": {
+    "message": "Sticky",
+    "description": "Stats label: sticky engagements"
+  },
+  "settingsTitle": {
+    "message": "Settings — Fullscreen Control",
+    "description": "Options page title"
+  },
+  "importSuccess": {
+    "message": "Import successful!",
+    "description": "Import success message"
+  },
+  "importFailed": {
+    "message": "Import failed: $ERROR$",
+    "description": "Import failure message",
+    "placeholders": {
+      "error": { "content": "$1", "example": "Invalid JSON" }
+    }
+  }
+}
