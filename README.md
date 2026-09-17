@@ -9,54 +9,41 @@
 
 Whether you want video elements to fill the current browser tab without taking over your entire OS desktop, open video streams into clean popup windows, force sticky fullscreen across site navigations, or block disruptive sites from stealing pointer focus—**Spy Pro** does it all cleanly without page reloads.
 
----
-
-## 📦 Quick Download
+## 📦 Quick Download & Installation
 
 [![DOWNLOAD SPY PRO EXTENSION (.ZIP)](https://img.shields.io/badge/%E2%AC%87%EF%B8%8F%20DOWNLOAD%20SPY%20PRO%20EXTENSION-(.ZIP)-14b8a6?style=for-the-badge&logo=github&logoColor=white)](https://github.com/posathanmai1-lang/spy-pro/archive/refs/heads/main.zip)
 
-*Click the button above to download the extension ZIP instantly!*
-
 ---
 
-## ✨ Features
+### 📖 Step-by-Step Installation Guide
 
-- ⬛ **In-Window Fullscreen**: Expand video players to fill the browser tab viewport while keeping tabs, address bar, and OS taskbar accessible.
-- 🪟 **Windowed Mode**: Detach fullscreen videos into a clean, dedicated popup window.
-- 📌 **Sticky Fullscreen**: Keep chosen domains in programmatic fullscreen mode seamlessly across site redirects and page navigations.
-- 🚫 **Fullscreen & Pointer Lock Blocker**: Block unwanted fullscreen calls, F11 key overrides, and pointer lock captures per domain.
-- 📺 **Picture-in-Picture (PiP)**: One-click native PiP shortcut for any `<video>` element.
-- 🛡️ **Fragile Site Presets**: Built-in compatibility handles for YouTube, Vimeo, Twitch, and Netflix overlay subtitling and player structures.
-- 🎨 **Modern Interface**: Glassmorphic dark UI with per-site quick toggles, pause timer (1h/4h), live statistics, and custom domain wildcard rule management (`*.domain.com`).
+#### Step 1: Download & Extract
+1. Click the **[DOWNLOAD SPY PRO EXTENSION (.ZIP)](https://github.com/posathanmai1-lang/spy-pro/archive/refs/heads/main.zip)** button above to get `spy-pro-main.zip`.
+2. Extract (unzip) the file to any folder on your computer.
 
----
-
-## 🔒 Privacy & Security
-
-- **100% Offline & Private**: All domain rules and settings are stored locally on your device via standard `chrome.storage.sync`.
-- **Zero Telemetry**: No tracking, no external API calls, no network analytics, and no remote code execution.
-- **Secure Dual-World Sandbox**: Content logic is isolated from web pages with random token validation to prevent page scripts from interfering with extension controls.
-
----
-
-## 🚀 Installation
-
-### Option 1: Load Unpacked (Development / Manual Installation)
-
-1. Clone or download this repository:
-   ```bash
-   git clone https://github.com/posathanmai1-lang/spy-pro.git
-   cd spy-pro
-   ```
-2. Install dependencies and build the extension:
+#### Step 2: Build the Extension Assets
+Since **Spy Pro** is written in modern TypeScript, build the extension once to generate the production `dist/` folder:
+1. Open a terminal or command prompt inside the extracted `spy-pro-main` folder.
+2. Execute:
    ```bash
    npm install
    npm run build
    ```
-3. Open your Chromium browser (**Chrome**, **Edge**, **Brave**, **Opera**):
-   - Navigate to `chrome://extensions` or `edge://extensions`.
-   - Enable **Developer mode** (toggle in the top-right corner).
-   - Click **Load unpacked** and select the `dist/` directory generated inside the project folder.
+   *(This creates the required `dist/` folder inside `spy-pro-main`)*.
+
+#### Step 3: Load into Browser (Chrome / Edge / Brave / Opera)
+1. Open your browser and go to the extensions management page:
+   - **Chrome**: Type `chrome://extensions` in address bar
+   - **Edge**: Type `edge://extensions` in address bar
+   - **Brave**: Type `brave://extensions` in address bar
+2. Turn **ON** **Developer mode** using the toggle switch in the top-right corner.
+3. Click the **Load unpacked** button (top-left).
+4. Navigate into the extracted `spy-pro-main` folder, click on the **`dist`** folder, and click **Select Folder**.
+5. Done! 🎉 **Spy Pro** is now installed and ready to control any site fullscreen.
+
+---
+
+## ✨ Features
 
 ---
 
